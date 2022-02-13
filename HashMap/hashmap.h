@@ -36,6 +36,7 @@ public:
     void remove(T);
 private:
     Y* mem;
+    T* keys;
     size_t length;
 
     size_t get_index_for(T);
@@ -44,9 +45,11 @@ private:
 template<typename T, typename Y>
 hashmap<T, Y>::hashmap(size_t len) {
     this->mem = (Y*)malloc(len * sizeof(Y));
-    if (this->mem != nullptr) {
+    this->keys = (T*) malloc(len * sizeof (T));
+    if (this->mem != nullptr && this->keys != nullptr) {
         this->length = len;
-        memset(this->mem, 0, len);
+        memset(this->mem, (Y)0, len);
+        memset(this->keys, (Y)0, len);
     }
     else
         this->length = 0;
@@ -71,7 +74,10 @@ size_t hashmap<T,Y>::get_index_for(T key){
 template<typename T, typename Y>
 void hashmap<T, Y>::put(T key, Y data) {
     //fixme: implement resizing
+    //fixme: implement buckets
     auto index = this->get_index_for(key);
+    if(this->keys[index] != (T)NULL && this->keys[index] != key)
+        printf("Collision!\n");
     this->mem[index] = data;
 }
 

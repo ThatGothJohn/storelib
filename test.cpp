@@ -6,10 +6,10 @@
 
 int main(int argc, char** argv){
     (void)argc, (void)argv;
-    size_t len = 30;
+    size_t len = 26;
     hashmap<char,size_t> b(len);
 
-    const char wa[] = "1234uboc:{:@];[;q9uopwQWE";
+    const char wa[] = "abcdefghijklmnopqrstuvwxyz";
     for (char ch : wa) {
         b.put(ch, 42);
     }
