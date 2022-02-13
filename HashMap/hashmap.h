@@ -9,11 +9,12 @@
 #include <cstring>
 #include <cassert>
 #include <bit>
+#include <cstdio>
 
 //https://lemire.me/blog/2018/08/15/fast-strongly-universal-64-bit-hashing-everywhere/
 template<typename T>
-u_int64_t simple_hash(T data){
-    u_int32_t a = 0xFF5242A3,b=0x123BF069,c=0xDEADBEEF; //magic constants
+u_int32_t simple_hash(T data){
+    u_int64_t a = 0x1AFF5242A3F32542,b=0x0BA18C49123BF069,c=0xDEADBEEFDEADC0D3; //magic constants
 
     auto sized_data = (u_int64_t) data;
 //    int low = (int)x;
@@ -21,7 +22,7 @@ u_int64_t simple_hash(T data){
 //    int high = (int)(x >>> 32);
     auto high = (u_int32_t) (sized_data >> 32);
 //    return (int)((a * low + b * high + c) >>> 32);
-    return std::rotr((a * low + b * high + c), 32);
+    return (u_int32_t)((a * low + b * high + c)>>32);
 }
 
 template<typename T,typename Y>
@@ -63,6 +64,7 @@ Y& hashmap<T,Y>::operator[](size_t index){
 template<typename T, typename Y>
 size_t hashmap<T,Y>::get_index_for(T key){
     auto hash = simple_hash(key);
+    printf("%u\t%u\n", key, hash);
     return hash%this->length;
 }
 

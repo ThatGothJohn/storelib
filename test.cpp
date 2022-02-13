@@ -22,7 +22,7 @@ int main(int argc, char** argv){
     auto y = simple_hash("oh no!");
     auto z = simple_hash(0x1234FF5432198765);
 
-    printf("\nSimple hash test: \n\"oh no!\" : %#lX \n52 : %#lX \n\"oh no!\" : %#lX \n0x1234FF5432198765 : %#lX\n%lu\n",w, x,y,z, sizeof (z));
+    printf("\nSimple hash test: \n\"oh no!\" : %#X \n52 : %#X \n\"oh no!\" : %#X \n0x1234FF5432198765 : %#X\n%lu\n",w, x,y,z, sizeof (z));
 
 
     return 0;
