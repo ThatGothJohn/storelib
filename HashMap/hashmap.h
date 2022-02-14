@@ -31,13 +31,13 @@ public:
     hashmap();
     explicit hashmap(size_t);
     Y& operator[](size_t);
-    ~hashmap() = default;
+    ~hashmap();
     void put(T, Y);
     void remove(T);
 private:
     Y* mem;
     T* keys;
-    size_t length;
+    size_t length{};
 
     size_t get_index_for(T);
 };
@@ -86,5 +86,12 @@ void hashmap<T, Y>::remove(T key) {
     auto index = this->get_index_for(key);
     this->mem[index] = (Y)NULL;
 }
+
+template<typename T, typename Y>
+hashmap<T, Y>::~hashmap() {
+    free(this->mem);
+    free(this->keys);
+}
+
 
 #endif //STORELIB_HASHMAP_H
