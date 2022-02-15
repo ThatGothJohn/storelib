@@ -6,16 +6,28 @@
 
 int main(int argc, char** argv){
     (void)argc, (void)argv;
-    size_t len = 26;
-    hashmap<char,size_t> b(len);
+    size_t len = 25;
+    hashmap<int,int> b(len);
 
-    const char wa[] = "abcdefghijklmnopqrstuvwxyz";
+    const char wa[] = "1234567890-=qwertyuiop[]#asdfghjkl;'zxcvbnm,./\\`¬!£$%^&*()_+{}~:@<>?|QWERTYUIOPASDFGHJKLZXCVBNM";
+    auto i = 0;
     for (char ch : wa) {
-        b.put(ch, 42);
+        b.put(ch, wa[sizeof(wa)-i]);
+        i++;
     }
+    auto count = 0;
+    for (char ch : wa) {
+        printf("%c : %c\n", b.get(ch), ch);
+        count++;
+    }
+    printf("\n %u : %lu \n", count, sizeof(wa));
 
-    for (size_t x =0;x<len;x++)
-        printf("%lu\n", b[x]);
+    auto a = b.get('A');
+    printf("%c\n", a);
+    b.remove('A');
+    a = b.get('A');
+    printf("%i\n", a);
+
 
     auto w = simple_hash("oh no!");
     auto x= simple_hash(52);
